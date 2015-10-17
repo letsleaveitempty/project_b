@@ -1,0 +1,23 @@
+// --- variables
+
+$base-gap: 1rem;
+
+// --- variables: colors
+
+$color--white: #fff;
+$color--black: #000405;
+$color--blue: #143045;
+$color--red: #ea323c;
+$color--green: #98ba6d;
+$color--beige: #f1edd4;
+
+// --- variables: fonts
+
+$font--base: 'Open Sans', sans-serif;
+$font--headline: 'Montserrat', sans-serif;
+
+$font-size--small: 1rem;
+$font-size--medium: 1.6rem;
+$font-size--large: $font-size--medium*1.5;
+$font-size--x-large: $font-size--large*1.5;
+$font-size--xx-large: $font-size--x-large*1.5;
