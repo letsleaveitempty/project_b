@@ -1,0 +1,19 @@
+%header.navbar
+  %h1.navbar__logo
+    = 'Wunschconcert'
+
+  %nav
+    %ul.navbar__items
+      - if user_signed_in
+        %li.navbar__item
+          %a.navbar__link{ href: edit_user_registration_path }
+            = 'Edit profile'
+        %li.navbar__item
+          -# TODO: replace href with destroy_user_session_path, method: :delete
+          %a.navbar__link{ href: '#' }
+            = 'Log out'
+      - else
+        %li.navbar__item
+          = 'Already a member?'
+          %a.navbar__link{ href: new_user_session_path }
+            = 'Login'
