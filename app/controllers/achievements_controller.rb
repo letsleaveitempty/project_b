@@ -1,28 +1,21 @@
 class AchievementsController < ApplicationController
   before_action :set_achievement, only: [:show, :edit, :update, :destroy]
 
-  # GET /achievements
-  # GET /achievements.json
   def index
+    get_user_instagram_id
     @achievements = current_user.achievements
   end
 
-  # GET /achievements/1
-  # GET /achievements/1.json
   def show
   end
 
-  # GET /achievements/new
   def new
     @achievement = Achievement.new
   end
 
-  # GET /achievements/1/edit
   def edit
   end
 
-  # POST /achievements
-  # POST /achievements.json
   def create
     @achievement = Achievement.new(achievement_params)
 
@@ -37,8 +30,6 @@ class AchievementsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /achievements/1
-  # PATCH/PUT /achievements/1.json
   def update
     respond_to do |format|
       if @achievement.update(achievement_params)
@@ -51,8 +42,6 @@ class AchievementsController < ApplicationController
     end
   end
 
-  # DELETE /achievements/1
-  # DELETE /achievements/1.json
   def destroy
     @achievement.destroy
     respond_to do |format|
@@ -70,5 +59,25 @@ class AchievementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def achievement_params
       params.require(:achievement).permit(:name, :description, :hashtags, :status).merge(user_id: current_user.id, status: 'planned')
+    end
+
+    def get_user_instagram_id
+      response = instagram_client.user_search("letsleaveitempty")
+      user_id  = response[0]["id"]
+      get_user_media(user_id, "berlin")
+    end
+
+    def instagram_client
+      Instagram.client(client_id: '5ab7145c032945608d7ebcf66059bef3')
+    end
+
+    def get_user_media(user_id, tag)
+      response = instagram_client.user_recent_media(user_id)
+      response.each do |media|
+        if media["tags"].include?(tag)
+          #save the pic to achievement and update status
+          puts media["link"]
+        end
+      end
     end
 end

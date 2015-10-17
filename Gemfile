@@ -14,6 +14,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'haml', '~> 4.0.7'
 gem 'devise'
+gem 'instagram'
+gem 'pry'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
