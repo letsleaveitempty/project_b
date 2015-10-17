@@ -4,7 +4,7 @@ class AchievementsController < ApplicationController
   # GET /achievements
   # GET /achievements.json
   def index
-    @achievements = Achievement.all
+    @achievements = current_user.achievements
   end
 
   # GET /achievements/1
@@ -24,7 +24,7 @@ class AchievementsController < ApplicationController
   # POST /achievements
   # POST /achievements.json
   def create
-    @achievement = Achievement.new(achievement_params)
+    @achievement = Achievement.new(achievement_params, user_id: current_user.id)
 
     respond_to do |format|
       if @achievement.save
@@ -69,6 +69,6 @@ class AchievementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achievement_params
-      params.require(:achievement).permit(:name, :description, :hashtags, :status)
+      params.require(:achievement).permit(:name, :description, :hashtags, :status).merge(user_id: current_user.id)
     end
 end
