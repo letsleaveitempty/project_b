@@ -13,5 +13,5 @@
       %p.alert.alert-success= notice
     - if alert
       %p.alert.alert-danger= alert
-    = render partial: 'partials/navbar', locals: { user_signed_in: user_signed_in? }
+
     = yield

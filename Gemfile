@@ -38,7 +38,7 @@ gem 'omniauth-facebook'
 # gem 'capistrano-rails', group: :development
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-normalize-css', '~> 3.0.3'
+  gem 'rails-assets-foundation', '~> 5.5.3'
 end
 
 group :development, :test do

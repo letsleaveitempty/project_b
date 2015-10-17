@@ -1,14 +1,18 @@
 // --- core
 
-html,
-body {
-  font-size: 62.5%;
+h1 {
+  font-family: $font--headline;
 }
 
 body {
   font-family: $font--base;
 }
 
-a {
-  text-decoration: none;
+input,
+.button {
+  font-family: $font--base;
+}
+
+.button {
+  text-transform: uppercase;
 }

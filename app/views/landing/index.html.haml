@@ -1,8 +1,10 @@
+= render 'partials/navbar', modifier: '', user_signed_in: user_signed_in?
+
 %section.intro
-  .intro__body
-    %h2.intro__claim
+  %div
+    %h1.claim
       = 'Life is more than a simple to-do list.'
-    .intro__slogan
+    .slogan
       != 'Get your dreams done with <b>Wunschconcert</b>.'
-    %a.button.intro__button{ href: new_user_registration_path }
+    %a.button.success{ href: new_user_registration_path }
       = 'Join Wunschconcert'
