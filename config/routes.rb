@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     delete 'sign_out', :to => 'devise/sessions#destroy'
   end
   resources :achievements
-  devise_for :users
 
 
   # The priority is based upon order of creation: first created -> highest priority.
