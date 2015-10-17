@@ -4,7 +4,7 @@ class AchievementsController < ApplicationController
   # GET /achievements
   # GET /achievements.json
   def index
-    @achievements = Achievement.all
+    @achievements = current_user.achievements
   end
 
   # GET /achievements/1
@@ -69,6 +69,6 @@ class AchievementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achievement_params
-      params.require(:achievement).permit(:name, :description, :hashtags, :status)
+      params.require(:achievement).permit(:name, :description, :hashtags, :status).merge(user_id: current_user.id, status: 'planned')
     end
 end
