@@ -1,0 +1,20 @@
+- content_for :navbar do
+  = render 'partials/navbar', user_signed_in: user_signed_in?, modifier: ''
+
+.row
+  .small-6.small-centered.columns
+    %h2= 'Forgot your password?'
+
+    = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post } do |f|
+      = devise_error_messages!
+
+      .row
+        .large-12.columns
+          = f.label :email
+          = f.email_field :email
+
+      .row
+        .large-12.columns
+          %button.expand= "Send me reset password instructions"
+
+    = render "devise/shared/links"

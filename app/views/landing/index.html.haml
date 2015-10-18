@@ -1,4 +1,5 @@
-= render 'partials/navbar', modifier: '', user_signed_in: user_signed_in?
+- content_for :navbar do
+  = render 'partials/navbar', modifier: '', user_signed_in: user_signed_in?
 
 %section.intro
   %div
