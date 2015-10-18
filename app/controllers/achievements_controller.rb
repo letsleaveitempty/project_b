@@ -2,6 +2,12 @@ class AchievementsController < ApplicationController
   before_action :set_achievement, only: [:edit, :update, :destroy]
 
   def index
+    current_user.achievements.each do |achievement|
+      if achievement.status == "planned"
+        fetch_and_save_user_media(achievement)
+      end
+    end
+
     @achievements = current_user.achievements
   end
 
