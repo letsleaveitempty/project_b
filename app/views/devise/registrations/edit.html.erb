@@ -16,6 +16,13 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :instagram_username %>
+      <%= f.text_field :instagram_username %>
+    </div>
+  </div>
+
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>

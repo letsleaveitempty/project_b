@@ -7,7 +7,11 @@ class AchievementsController < ApplicationController
 
   def show
     achievement = Achievement.find(params[:id])
-    fetch_and_save_user_media(achievement)
+
+    if achievement.status == "planned"
+      fetch_and_save_user_media(achievement)
+    end
+
     @achievement = achievement
   end
 
@@ -60,7 +64,7 @@ class AchievementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achievement_params
-      params.require(:achievement).permit(:name, :description, :hashtags, :status)
+      params.require(:achievement).permit(:name, :description, :hashtag, :status)
     end
 
     def instagram_client
@@ -71,11 +75,12 @@ class AchievementsController < ApplicationController
       # run it on action show and once a day
       response = instagram_client.user_recent_media(current_user.instagram_user_id)
       response.each do |media|
-        if media["tags"].include?(achievement.hashtags)
+        if media["tags"].include?(achievement.hashtag)
 
           achievement.update_attributes(
             image_direct_link: media["images"]["standard_resolution"]["url"],
             image_instagram_link: media["link"],
+            instagram_caption: media["caption"]["text"],
             status: "done"
           )
         end

@@ -8,6 +8,7 @@
     .row
       .columns.large-10.large-centered
         %h1= 'My personal list'
+        %h4= "#{@achievements.done.count} out of #{@achievements.count} done!"
 
         = link_to 'New achievement', new_achievement_path, class: 'button small'
 
@@ -19,4 +20,6 @@
                 %br
                 = achievement.description
                 %hr
-                = achievement.hashtags
+                = achievement.hashtag
+                = achievement.status
+                = image_tag(achievement.image_direct_link)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018000514) do
+ActiveRecord::Schema.define(version: 20151018095945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,14 @@ ActiveRecord::Schema.define(version: 20151018000514) do
   create_table "achievements", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "hashtags"
+    t.string   "hashtag"
     t.string   "status"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "user_id"
     t.string   "image_direct_link"
     t.string   "image_instagram_link"
+    t.string   "instagram_caption"
   end
 
   create_table "users", force: :cascade do |t|
