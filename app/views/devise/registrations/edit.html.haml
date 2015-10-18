@@ -1,0 +1,51 @@
+- content_for :navbar do
+  = render 'partials/navbar', user_signed_in: user_signed_in?, modifier: ''
+
+.row
+  .columns.large-12
+    %h1
+      = "Edit #{resource_name.to_s.humanize}"
+
+    = form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f|
+      = devise_error_messages!
+
+      .row
+        .large-12.columns
+          = f.label :email
+          = f.email_field :email
+
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        .row
+          .large-12.columns
+            .alert-box.alert
+              = "Currently waiting confirmation for: #{resource.unconfirmed_email}"
+
+      .row
+        .large-12.columns
+          = f.label :instagram_username
+          = f.text_field :instagram_username
+
+      .row
+        .large-12.columns
+          = f.label :password
+          %i= "(leave blank if you don't want to change it)"
+          = f.password_field :password
+
+      .row
+        .large-12.columns
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
+
+      .row
+        .large-12.columns
+          = f.label :current_password
+          %i= "(we need your current password to confirm your changes)"
+          = f.password_field :current_password
+
+      .row
+        .large-12.columns
+          %button{ type: 'submit' }
+            = 'Update'
+
+    = button_to 'Cancel my account', registration_path(resource_name), data: { confirm: "Are you sure?" },
+      method: :delete, class: 'button tiny alert'

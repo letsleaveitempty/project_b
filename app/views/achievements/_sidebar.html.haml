@@ -1,1 +1,9 @@
-= 'Sidebar'
+.columns.large-3
+  .profile
+    = current_user.email
+
+  %ul.side-nav
+    %li.heading
+      = 'Achievements list'
+    %li
+      = link_to 'My Personal List', achievements_path
