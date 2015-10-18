@@ -33,7 +33,7 @@ class AchievementsController < ApplicationController
 
     respond_to do |format|
       if @achievement.save
-        format.html { redirect_to @achievement, notice: 'Achievement was successfully created.' }
+        format.html { redirect_to achievements_path, notice: 'Achievement was successfully created.' }
         format.json { render :show, status: :created, location: @achievement }
       else
         format.html { render :new }
