@@ -2,7 +2,6 @@ class AchievementsController < ApplicationController
   before_action :set_achievement, only: [:show, :edit, :update, :destroy]
 
   def index
-    get_user_instagram_id
     @achievements = current_user.achievements
   end
 
@@ -17,7 +16,7 @@ class AchievementsController < ApplicationController
   end
 
   def create
-    @achievement = Achievement.new(achievement_params)
+    @achievement = Achievement.new(achievement_params.merge(user_id: current_user.id, status: 'planned'))
 
     respond_to do |format|
       if @achievement.save
@@ -58,17 +57,18 @@ class AchievementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achievement_params
-      params.require(:achievement).permit(:name, :description, :hashtags, :status).merge(user_id: current_user.id, status: 'planned')
+      params.require(:achievement).permit(:name, :description, :hashtags, :status)
     end
 
     def get_user_instagram_id
       response = instagram_client.user_search("letsleaveitempty")
       user_id  = response[0]["id"]
-      get_user_media(user_id, "berlin")
+      # save instagram_user_id
+      # move this code to devise controller (?)
     end
 
     def instagram_client
-      Instagram.client(client_id: '5ab7145c032945608d7ebcf66059bef3')
+      Instagram.client(client_id: "#{ENV['WUNSCHCONCERT_INSTAGRAM_ID']}")
     end
 
     def get_user_media(user_id, tag)

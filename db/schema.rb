@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017153005) do
+ActiveRecord::Schema.define(version: 20151018000514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,13 @@ ActiveRecord::Schema.define(version: 20151017153005) do
     t.text     "description"
     t.string   "hashtags"
     t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "user_id"
+    t.string   "instagram_username"
+    t.string   "instagram_user_id"
+    t.string   "image_direct_link"
+    t.string   "image_instagram_link"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,9 +43,13 @@ ActiveRecord::Schema.define(version: 20151017153005) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
 end
