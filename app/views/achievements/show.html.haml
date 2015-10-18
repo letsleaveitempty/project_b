@@ -21,11 +21,16 @@
       = "Status:"
       = @achievement.status
 
-    .row
-      = image_tag(@achievement.image_direct_link)
-      %br
-      = link_to "See it on instagram", @achievement.image_instagram_link, target: '_blank'
+    - if @achievement.status == "done"
+      .row
+        = @achievement.instagram_caption
 
-    = link_to 'Edit', edit_achievement_path(@achievement)
-    = '|'
+      .row
+        = image_tag(@achievement.image_direct_link)
+        %br
+        = link_to "See it on instagram", @achievement.image_instagram_link, target: '_blank'
+
+    - if @achievement.status == "planned"
+      = link_to 'Edit', edit_achievement_path(@achievement)
+      = '|'
     = link_to 'Back', achievements_path

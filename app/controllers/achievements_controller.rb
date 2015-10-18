@@ -7,7 +7,11 @@ class AchievementsController < ApplicationController
 
   def show
     achievement = Achievement.find(params[:id])
-    fetch_and_save_user_media(achievement)
+
+    if achievement.status == "planned"
+      fetch_and_save_user_media(achievement)
+    end
+
     @achievement = achievement
   end
 
@@ -76,6 +80,7 @@ class AchievementsController < ApplicationController
           achievement.update_attributes(
             image_direct_link: media["images"]["standard_resolution"]["url"],
             image_instagram_link: media["link"],
+            instagram_caption: media["caption"]["text"],
             status: "done"
           )
         end
