@@ -3,7 +3,7 @@
 
 .row
   = render 'sidebar'
-  .large-9.columns
+  .medium-9.columns
     .row
       %h1= 'My personal list'
       %h4= "#{@achievements.done.count} out of #{@achievements.count} done!"
@@ -14,8 +14,8 @@
         %ol.achievements
           - @achievements.each do |achievement|
             %li
-              .achievement
-                .details
+              .row
+                .columns.medium-7
                   - if achievement.status == 'done'
                     %span.label.success= 'DONE'
                   - else
@@ -25,4 +25,4 @@
                   %div= achievement.description
                   .hashtag= "##{achievement.hashtag}"
                 - if achievement.image_direct_link
-                  = image_tag(achievement.image_direct_link, class: 'photo')
+                  = image_tag(achievement.image_direct_link, class: 'columns medium-5')
