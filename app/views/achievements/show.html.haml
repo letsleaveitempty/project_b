@@ -14,12 +14,17 @@
       = @achievement.description
 
     .row
-      = "Hashtags:"
-      = @achievement.hashtags
+      = "Hashtag:"
+      = @achievement.hashtag
 
     .row
       = "Status:"
       = @achievement.status
+
+    .row
+      = image_tag(@achievement.image_direct_link)
+      %br
+      = link_to "See it on instagram", @achievement.image_instagram_link, target: '_blank'
 
     = link_to 'Edit', edit_achievement_path(@achievement)
     = '|'

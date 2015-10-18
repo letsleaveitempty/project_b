@@ -3,11 +3,11 @@
 one:
   name: MyString
   description: MyText
-  hashtags: MyString
+  hashtag: MyString
   status: MyString
 
 two:
   name: MyString
   description: MyText
-  hashtags: MyString
+  hashtag: MyString
   status: MyString
