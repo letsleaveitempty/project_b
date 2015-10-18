@@ -11,13 +11,18 @@
       = link_to 'New achievement', new_achievement_path, class: 'button small'
 
       - if @achievements
-        %ol
+        %ol.achievements
           - @achievements.each do |achievement|
             %li
-              = link_to achievement.name, achievement
-              %br
-              = achievement.description
-              %hr
-              = achievement.hashtag
-              = achievement.status
-              = image_tag(achievement.image_direct_link)
+              .achievement
+                .details
+                  - if achievement.status == 'done'
+                    %span.label.success= 'DONE'
+                  - else
+                    %span.label.alert= 'TO DO'
+                  %h3
+                    = achievement.name
+                  %div= achievement.description
+                  .hashtag= "##{achievement.hashtag}"
+                - if achievement.image_direct_link
+                  = image_tag(achievement.image_direct_link, class: 'photo')
