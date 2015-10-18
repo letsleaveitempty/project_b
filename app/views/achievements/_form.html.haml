@@ -1,0 +1,32 @@
+= form_for @achievement do |f|
+  - if @achievement.errors.any?
+    .alert-box.alert
+      %p= "#{pluralize(@achievement.errors.count, "error")} prohibited this achievement from being saved:"
+      %ul
+        - @achievement.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .columns.large-12
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .columns.large-12
+      = f.label :description
+      = f.text_area :description
+
+  .row
+    .columns.large-12
+      = f.label :hashtags
+      = f.text_field :hashtags
+
+  .row
+    .columns.large-12
+      = f.label :status
+      = f.text_field :status
+
+  .row
+    .columns.large-12
+      %button.expand{ type: 'submit' }
+        = 'Save'
