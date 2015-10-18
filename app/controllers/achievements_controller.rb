@@ -1,30 +1,25 @@
 class AchievementsController < ApplicationController
-  before_action :set_achievement, only: [:show, :edit, :update, :destroy]
+  before_action :set_achievement, only: [:edit, :update, :destroy]
 
-  # GET /achievements
-  # GET /achievements.json
   def index
     @achievements = current_user.achievements
   end
 
-  # GET /achievements/1
-  # GET /achievements/1.json
   def show
+    achievement = Achievement.find(params[:id])
+    fetch_and_save_user_media(achievement)
+    @achievement = achievement
   end
 
-  # GET /achievements/new
   def new
     @achievement = Achievement.new
   end
 
-  # GET /achievements/1/edit
   def edit
   end
 
-  # POST /achievements
-  # POST /achievements.json
   def create
-    @achievement = Achievement.new(achievement_params)
+    @achievement = Achievement.new(achievement_params.merge(user_id: current_user.id, status: 'planned'))
 
     respond_to do |format|
       if @achievement.save
@@ -37,8 +32,6 @@ class AchievementsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /achievements/1
-  # PATCH/PUT /achievements/1.json
   def update
     respond_to do |format|
       if @achievement.update(achievement_params)
@@ -51,8 +44,6 @@ class AchievementsController < ApplicationController
     end
   end
 
-  # DELETE /achievements/1
-  # DELETE /achievements/1.json
   def destroy
     @achievement.destroy
     respond_to do |format|
@@ -69,6 +60,25 @@ class AchievementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achievement_params
-      params.require(:achievement).permit(:name, :description, :hashtags, :status).merge(user_id: current_user.id, status: 'planned')
+      params.require(:achievement).permit(:name, :description, :hashtags, :status)
+    end
+
+    def instagram_client
+      Instagram.client(client_id: "#{ENV['WUNSCHCONCERT_INSTAGRAM_ID']}")
+    end
+
+    def fetch_and_save_user_media(achievement)
+      # run it on action show and once a day
+      response = instagram_client.user_recent_media(current_user.instagram_user_id)
+      response.each do |media|
+        if media["tags"].include?(achievement.hashtags)
+
+          achievement.update_attributes(
+            image_direct_link: media["images"]["standard_resolution"]["url"],
+            image_instagram_link: media["link"],
+            status: "done"
+          )
+        end
+      end
     end
 end
