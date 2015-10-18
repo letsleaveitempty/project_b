@@ -1,11 +1,14 @@
 class AchievementsController < ApplicationController
-  before_action :set_achievement, only: [:show, :edit, :update, :destroy]
+  before_action :set_achievement, only: [:edit, :update, :destroy]
 
   def index
     @achievements = current_user.achievements
   end
 
   def show
+    achievement = Achievement.find(params[:id])
+    fetch_and_save_user_media(achievement)
+    @achievement = achievement
   end
 
   def new
@@ -60,23 +63,21 @@ class AchievementsController < ApplicationController
       params.require(:achievement).permit(:name, :description, :hashtags, :status)
     end
 
-    def get_user_instagram_id
-      response = instagram_client.user_search("letsleaveitempty")
-      user_id  = response[0]["id"]
-      # save instagram_user_id
-      # move this code to devise controller (?)
-    end
-
     def instagram_client
       Instagram.client(client_id: "#{ENV['WUNSCHCONCERT_INSTAGRAM_ID']}")
     end
 
-    def get_user_media(user_id, tag)
-      response = instagram_client.user_recent_media(user_id)
+    def fetch_and_save_user_media(achievement)
+      # run it on action show and once a day
+      response = instagram_client.user_recent_media(current_user.instagram_user_id)
       response.each do |media|
-        if media["tags"].include?(tag)
-          #save the pic to achievement and update status
-          puts media["link"]
+        if media["tags"].include?(achievement.hashtags)
+
+          achievement.update_attributes(
+            image_direct_link: media["images"]["standard_resolution"]["url"],
+            image_instagram_link: media["link"],
+            status: "done"
+          )
         end
       end
     end

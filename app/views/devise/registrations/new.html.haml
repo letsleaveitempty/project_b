@@ -15,6 +15,11 @@
 
       .row
         .large-12.columns
+          = f.label :instagram_username
+          = f.text_field :instagram_username
+
+      .row
+        .large-12.columns
           = f.label :password
           = f.password_field :password, autocomplete: "off"
           - if @minimum_password_length
