@@ -5,45 +5,26 @@
   align-self: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 2.8125rem);
   color: $color--white;
   background: url('bg-intro.jpg') 50% 50% no-repeat;
   background-size: cover;
-  font-size: $font-size--large;
   text-align: center;
 
-  &__claim,
-  &__slogan {
+  .claim,
+  .slogan {
     text-shadow: 0 .3rem 1rem rgba($color--black, .5);
   }
 
-  &__claim {
+  .claim {
     margin: 0;
-    font-family: $font--headline;
-    font-size: $font-size--xx-large;
-  }
-
-  &__slogan {
-    margin: $base-gap*2 0;
-    line-height: 1.2;
-  }
-
-  &__button {
-    display: inline-block;
-    margin-top: $base-gap;
-    padding: $base-gap $base-gap*1.5;
     color: $color--white;
-    background: $color--green;
-    border: .2rem solid $color--green;
-    font-size: $font-size--medium;
-    font-weight: bold;
-    letter-spacing: .1rem;
-    transition: background .2s ease-in-out, color .2s ease-in-out;
-    text-transform: uppercase;
+    font-family: $font--headline;
+  }
 
-    &:hover {
-      background: transparent;
-      color: $color--white;
-    }
+  .slogan {
+    margin: $base-gap 0 $base-gap*2;
+    font-size: 1.6rem;
+    line-height: 1.2;
   }
 }

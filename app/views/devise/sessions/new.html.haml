@@ -1,0 +1,29 @@
+- content_for :navbar do
+  = render 'partials/navbar', user_signed_in: user_signed_in?, modifier: ''
+
+.row
+  .small-6.small-centered.columns
+    %h2= 'Log in'
+
+    = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+      .row
+        .large-12.columns
+          = f.label :email
+          = f.email_field :email
+
+      .row
+        .large-12.columns
+          = f.label :password
+          = f.password_field :password, autocomplete: "off"
+
+      - if devise_mapping.rememberable?
+        .row
+          .large-12.columns
+            = f.check_box :remember_me
+            = f.label :remember_me
+
+      .row
+        .large-12.columns
+          %button.expand= "Log in"
+
+    = render "devise/shared/links"

@@ -9,9 +9,11 @@
     = csrf_meta_tag
 
   %body
+    = yield :navbar
+
     - if notice
-      %p.alert.alert-success= notice
+      .alert-box.success= notice
     - if alert
-      %p.alert.alert-danger= alert
-    = render partial: 'partials/navbar', locals: { user_signed_in: user_signed_in? }
+      .alert-box.alert= alert
+
     = yield

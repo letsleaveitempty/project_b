@@ -51,5 +51,4 @@ ActiveRecord::Schema.define(version: 20151018000514) do
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
-
 end

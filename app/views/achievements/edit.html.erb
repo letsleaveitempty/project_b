@@ -1,3 +1,7 @@
+<%= content_for :navbar do %>
+  <%= render 'partials/navbar', user_signed_in: user_signed_in?, modifier: '' %>
+<% end %>
+
 <h1>Editing Achievement</h1>
 
 <%= render 'form' %>
