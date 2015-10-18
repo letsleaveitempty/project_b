@@ -5,7 +5,7 @@
   align-self: center;
   justify-content: center;
   flex-direction: column;
-  height: calc(100vh - 2.8125rem);
+  height: calc(100vh - #{$topbar-height});
   color: $color--white;
   background: url('bg-intro.jpg') 50% 50% no-repeat;
   background-size: cover;
