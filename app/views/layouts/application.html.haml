@@ -9,9 +9,11 @@
     = csrf_meta_tag
 
   %body
+    = yield :navbar
+
     - if notice
-      %p.alert.alert-success= notice
+      .alert-box.success= notice
     - if alert
-      %p.alert.alert-danger= alert
+      .alert-box.alert= alert
 
     = yield
