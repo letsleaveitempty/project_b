@@ -1,0 +1,12 @@
+- content_for :navbar do
+  = render 'partials/navbar', user_signed_in: user_signed_in?, modifier: ''
+
+.row
+  .large-3.columns
+    = render 'sidebar'
+  .large-9.columns
+    .row
+      .columns.large-10.large-centered
+        %h1= 'New achievement'
+
+        = render 'form'

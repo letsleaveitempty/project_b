@@ -1,0 +1,22 @@
+- content_for :navbar do
+  = render 'partials/navbar', user_signed_in: user_signed_in?, modifier: ''
+
+.row
+  .large-3.columns
+    = render 'sidebar'
+  .large-9.columns
+    .row
+      .columns.large-10.large-centered
+        %h1= 'My personal list'
+
+        = link_to 'New achievement', new_achievement_path, class: 'button small'
+
+        - if @achievements
+          %ol
+            - @achievements.each do |achievement|
+              %li
+                = link_to achievement.name, achievement
+                %br
+                = achievement.description
+                %hr
+                = achievement.hashtags
